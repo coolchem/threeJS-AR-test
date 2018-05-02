@@ -1,0 +1,17 @@
+node_modules
+.idea
+**/*.iml
+.DS_STORE
+src/**/*.js
+src/**/*.css
+tests/**/*.js
+!src/**/libs/**/*
+!src/client/assets/fonts/**/*.css
+**/*.map
+coverage
+reporters
+dist
+temp
+npm-debug.log
+.env
+docs

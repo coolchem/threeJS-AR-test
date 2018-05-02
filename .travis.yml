@@ -1,0 +1,42 @@
+sudo: false
+
+language: node_js
+
+env:
+  - NODE_ENV=CI
+
+node_js:
+  - "8.0.0"
+  - "8.1.0"
+
+branches:
+  only:
+  - master
+  - production
+
+install:
+  - npm run install-deps
+
+before_script:
+    - export DISPLAY=:99.0
+    - sh -e /etc/init.d/xvfb start
+
+after_script:
+  - npm run report-coverage
+
+before_deploy:
+  - npm run build-release
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: $HEROKU_API_KEY
+  app:
+    production: $HEROKU_WEB_APP_NAME
+  skip_cleanup: true
+  on:
+    branch: production
+    node: 8.0.0
+
+git:
+  depth: 10
