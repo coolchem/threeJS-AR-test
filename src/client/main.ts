@@ -1,8 +1,6 @@
 
 import {Application} from "./views/views";
 
-let appNode:HTMLDivElement = document.getElementById("app") as HTMLDivElement;
-
-let application:Application = new Application(appNode);
+let application:Application = new Application(document.body);
 
 application.initialize();
