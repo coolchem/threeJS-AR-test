@@ -17,7 +17,7 @@ export class Application {
 
         this.appNode = appNode;
 
-        let connection = new WebSocket("ws://10.0.0.26:3000");
+        let connection = new WebSocket(`ws://${window.location.host}`);
 
         // When the connection is open, send some data to the server
         connection.onopen = function () {
@@ -46,7 +46,7 @@ export class Application {
     initialize():void {
 
         let geometry = new THREE.BoxGeometry( 1, 1, 1 );
-        let material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+        let material = new THREE.MeshNormalMaterial();
         this.cube = new THREE.Mesh( geometry, material );
         this.scene.add( this.cube );
         this.camera.position.z = 5;
@@ -59,8 +59,8 @@ export class Application {
         requestAnimationFrame( () => {
             this.animate();
         } );
-        this.cube.rotation.x += 0.02;
-        this.cube.rotation.y += 0.02;
+        this.cube.rotation.x += 0.008;
+        this.cube.rotation.y += 0.008;
 
         this.renderer.render( this.scene, this.camera );
     }
