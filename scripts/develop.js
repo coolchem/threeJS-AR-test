@@ -72,6 +72,7 @@ process.on('SIGHUP', function(){
 
 //catches uncaught exceptions
 process.on('uncaughtException', function (err) {
+    console.log(err)
    webpackPlugin.close();
    server.close();
 });

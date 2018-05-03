@@ -2,6 +2,8 @@
 import * as express from "express";
 import * as WebSocket from "ws";
 
+import "./controller";
+
 const ioHook = require("iohook");
 
 ioHook.on("keydown", event => {

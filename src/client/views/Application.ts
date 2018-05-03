@@ -44,7 +44,7 @@ export class Application {
         };
 
         this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+        this.camera = new THREE.PerspectiveCamera( 100, window.innerWidth / window.innerHeight, 0.01, 1000000 );
 
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setSize( window.innerWidth, window.innerHeight );
@@ -82,7 +82,7 @@ export class Application {
         let material = new THREE.MeshNormalMaterial();
         this.cube = new THREE.Mesh( geometry, material );
         this.scene.add( this.cube );
-        this.camera.position.z = 5;
+        this.camera.position.z = 0;
 
         this.animate();
 
