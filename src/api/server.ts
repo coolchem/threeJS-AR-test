@@ -2,9 +2,20 @@
 import * as express from "express";
 import * as WebSocket from "ws";
 
-import "./controller";
+const daydream = require("./daydream-node")();
 
 const ioHook = require("iohook");
+
+const EventTypes = {
+    CLICK:"click",
+};
+
+daydream.onStateChange(function(data) {
+    console.log(data);
+    if (data.isClickDown) {
+        sendEvent(EventTypes.CLICK);
+    }
+});
 
 ioHook.on("keydown", event => {
 
@@ -89,4 +100,21 @@ export function close() {
 if (env !== "development") {
 
     start( parseInt(process.env.PORT));
+}
+
+function sendEvent(eventType, data?) {
+
+    let event = {
+        type:eventType,
+        data:data,
+    };
+
+    if (webSocket) {
+        wss.clients
+            .forEach(client => {
+                if (client) {
+                    client.send(JSON.stringify(event));
+                }
+            });
+    }
 }
